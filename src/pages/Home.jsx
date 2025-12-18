@@ -1,5 +1,5 @@
 import React from "react";
-import QuizCard from "../components/QuizCard"; // Sesuaikan path ini
+import QuizCard from "../components/QuizCard"; 
 
 export default function Home() {
   const quizzes = [
@@ -30,24 +30,21 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col items-center py-10 px-4 font-roboto bg-[#3c255d] text-white">
-      <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold text-white">Welcome to Quizzle</h1>
-        <p className="text-lg opacity-80 mt-2">
+    <div className="min-h-screen flex flex-col items-center py-10 px-4 font-roboto text-white">
+      <div className="text-center mb-10 animate-fade-in-down">
+        <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-pink-400 to-purple-400 drop-shadow-lg">
+          Welcome to Quizzle
+        </h1>
+        <p className="text-xl text-purple-200 mt-3 font-light">
           Select a category below to start your journey!
         </p>
       </div>
 
-      <div className="flex flex-col gap-6 w-full items-center">
+      <div className="flex flex-col gap-6 w-full items-center max-w-4xl">
         {quizzes.map((quiz) => (
           <QuizCard
             key={quiz.id}
-            id={quiz.id}
-            name={quiz.name}
-            description={quiz.description}
-            time={quiz.time}
-            questions={quiz.questions}
-            colorTheme={quiz.colorTheme}
+            {...quiz}
           />
         ))}
       </div>

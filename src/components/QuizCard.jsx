@@ -2,62 +2,65 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const QuizCard = ({ id, name, description, time, questions, colorTheme }) => {
-
-  const themeColors = {
-    blue: "border-blue-500 bg-blue-500 text-blue-500 ring-blue-50",
-    pink: "border-pink-500 bg-pink-500 text-pink-500 ring-pink-50",
-    yellow: "border-yellow-500 bg-yellow-500 text-yellow-500 ring-yellow-50",
+  
+  const hoverBorders = {
+    blue: "hover:border-blue-500",
+    pink: "hover:border-pink-500",
+    yellow: "hover:border-yellow-500",
   };
 
-  const theme = themeColors[colorTheme] || themeColors.blue;
-  const [borderColor, bgColor, ringColor] = theme.split(" ");
+  const iconColors = {
+    blue: "text-blue-500 bg-blue-50",
+    pink: "text-pink-500 bg-pink-50",
+    yellow: "text-yellow-500 bg-yellow-50",
+  };
+
+  const hoverBorderClass = hoverBorders[colorTheme] || hoverBorders.blue;
+  const iconColorClass = iconColors[colorTheme] || iconColors.blue;
 
   return (
     <Link to={`/quiz/${id}`} className="group block w-full max-w-2xl">
       <article
-        className={`rounded-xl bg-white p-4 ring-3 ${ringColor} sm:p-6 lg:p-8 transition hover:shadow-lg hover:-translate-y-1`}
+        className={`
+          rounded-xl bg-white p-4 sm:p-6 lg:p-8 
+          transition-all duration-300 
+          border-3 border-transparent ${hoverBorderClass} 
+          hover:shadow-xl hover:-translate-y-1
+        `}
       >
-        <div className="flex items-start sm:gap-8">
-          <div className="w-full">
-            <h3 className="text-lg font-medium sm:text-xl text-gray-900 group-hover:underline">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex-1">
+            {/* Judul */}
+            <h3 className="text-2xl font-bold text-gray-900 group-hover:text-purple-800 transition-colors">
               {name}
             </h3>
 
-            <p className="mt-1 text-sm text-gray-700 line-clamp-2">
+            <p className="mt-2 text-sm text-gray-600 leading-relaxed line-clamp-2">
               {description}
             </p>
 
-            <div className="mt-4 sm:flex sm:items-center sm:justify-between">
-              <div className="mb-3 flex items-center gap-2">
-                <div className="flex items-center gap-1 text-gray-500">
-                  <svg
-                    className="size-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                  </svg>
-                  <p className="text-xs font-medium">{time}</p>
-                </div>
-
-                <span className="hidden sm:block text-gray-400">&middot;</span>
-
-                <p className="text-xs font-medium text-gray-500">{questions} Questions</p>
+            {/* Info Waktu & Jumlah Soal */}
+            <div className="mt-6 flex items-center gap-6 text-xs font-medium uppercase tracking-wider text-gray-400">
+              <div className="flex items-center gap-1.5">
+                <svg className="size-4 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {time}
               </div>
 
-              <strong
-                className={`rounded-sm border ${borderColor} ${bgColor} px-3 py-1.5 text-[10px] font-medium text-white mt-3 sm:mt-0`}
-              >
-                Start Quiz
-              </strong>
+              <div className="flex items-center gap-1.5">
+                <svg className="size-4 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                {questions} Questions
+              </div>
             </div>
+          </div>
+
+          <div className={`hidden sm:flex items-center justify-center w-12 h-12 rounded-full transition-colors ${iconColorClass}`}>
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
           </div>
         </div>
       </article>
