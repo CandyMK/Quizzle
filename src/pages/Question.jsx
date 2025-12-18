@@ -39,17 +39,27 @@ export default function Question({ index, questions, onSelectAnswer, onSkipAnswe
 
   let timer = 30000;
   if(answer.selectedAnswer) {
-    timer = 1000;
+    timer = 1000; 
   } 
   if(answer.isCorrect != null) {
     timer = 2000;
   }
 
   return (
-    <div id="question" className="flex flex-col gap-6 p-6 bg-linear-to-r from-[#f3dfec] via-[#f1e8f8] to-[#dcebfb] backdrop-blur-lg rounded-2xl shadow-md max-w-2xl mx-auto">
-      <QuestionTimer key={timer} timeout={timer} onTimeout={answer.selectedAnswer === '' ? onSkipAnswer : null} mode={answerState} />
+    <div id="question" className="flex flex-col gap-8 p-8 bg-[#1d0433]/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl max-w-2xl mx-auto mt-5 animate-fade-in-up">
+      <div className="flex flex-col gap-2">
+        <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-purple-300 mb-1">
+            <span>Question {index + 1} of {questions.length}</span>
+            <span>{questions[index].category || "Quiz"}</span>
+        </div>
+        <QuestionTimer key={timer} timeout={timer} onTimeout={answer.selectedAnswer === '' ? onSkipAnswer : null} mode={answerState} />
+      </div>
 
-      <h2 className="text-2xl font-semibold text-gray-800 text-center">{questions[index].text}</h2>
+      <div className="py-4">
+        <h2 className="text-3xl font-bold text-white leading-tight text-center drop-shadow-md">
+          {questions[index].text}
+        </h2>
+      </div>
 
       <Answers
         answers={shuffledAnswers}

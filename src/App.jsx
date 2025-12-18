@@ -8,7 +8,7 @@ import Quiz from "./pages/Quiz.jsx";
 export default function App() {
   const location = useLocation();
 
-  const hideNavbarRoutes = ["/login", "/register"];
+  const hideNavbarRoutes = ["/", "/register"];
   const showNavbar = !hideNavbarRoutes.includes(location.pathname);
 
   return (
